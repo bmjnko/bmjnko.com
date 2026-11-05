@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "how-this-site-is-built",
+    "title": "How this site is built",
+    "summary": "Plain HTML, a little CSS, and Markdown files. No framework, no build step.",
+    "tag": "Note",
+    "date": "2026-11-05"
+  },
+  {
+    "slug": "flaky-tests-are-bugs-too",
+    "title": "Flaky tests are bugs too",
+    "summary": "A test that fails one run in fifty is telling you something. Listen to it.",
+    "tag": "Essay",
+    "date": "2026-10-21"
+  },
+  {
+    "slug": "ordered-dithering",
+    "title": "Ordered dithering, the trick behind this site's art",
+    "summary": "How a 4x4 matrix turns smooth shading into crisp pixels, with the math and the code.",
+    "tag": "Project",
+    "date": "2026-09-30"
+  }
+]

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing - Beomjoon Ko</title>
+<meta name="description" content="Writing by Beomjoon Ko.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libertinus+Serif&family=Inter:wght@300;400;500;900&family=Fragment+Mono&display=swap">
+<script>document.documentElement.className = 'js';</script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  /* Post page only. The post itself is writing/posts/<slug>.md */
+
+  /* ---------- Header ---------- */
+  .post-head h1 { margin-top: 16px; font-size: 44px; line-height: 1.05; }
+  .post-head .lead { margin-top: 16px; }
+  .byline {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    margin: 32px 0 0;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .byline dt { color: var(--ink); font-weight: 400; }
+  .byline dd { margin: 0; }
+  .loading { margin-top: 8px; font: 400 14px/1.7 var(--mono); color: var(--dim); }
+
+  /* ---------- Article body ---------- */
+  .body { margin-top: 40px; line-height: 1.75; }
+  .body > * { margin-bottom: 0; }
+  .body > * + * { margin-top: 18px; }
+  .body h2 { margin-top: 48px; font-size: 26px; line-height: 1.2; }
+  .body h3 { margin-top: 32px; font: 400 20px/1.3 var(--serif); letter-spacing: -.01em; color: var(--ink); }
+  .body h2 + *, .body h3 + * { margin-top: 10px; }
+  .body strong { font-weight: 500; color: var(--ink); }
+  .body ul, .body ol { padding-left: 22px; }
+  .body li + li { margin-top: 6px; }
+  .body li::marker { color: var(--dim); }
+  .body blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+    font-style: italic;
+  }
+  .body blockquote > * + * { margin-top: 12px; }
+  .body hr { margin: 40px 0; height: 1px; border: 0; background: var(--line); }
+
+  .body :not(pre) > code {
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: var(--cream);
+    color: var(--ink);
+    font: 400 .875em/1 var(--mono);
+  }
+  .body pre {
+    margin-left: -32px;
+    margin-right: -32px;
+    padding: 20px 32px;
+    border-radius: 12px;
+    background: var(--accent-dark);
+    color: var(--cream);
+    font: 400 13.5px/1.7 var(--mono);
+    tab-size: 2;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(246, 241, 230, .3) transparent;
+  }
+  .body pre code { font: inherit; }
+  /* Show code exactly as typed: no => or == ligatures (after the font shorthands, which reset these) */
+  .body pre, .body pre code, .body :not(pre) > code { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+
+  /* Code colors, tuned for the dark green block */
+  .hljs-comment, .hljs-quote { color: #8fb8a3; font-style: italic; }
+  .hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-built_in, .hljs-doctag { color: #9fe3bd; }
+  .hljs-string, .hljs-regexp, .hljs-template-tag, .hljs-addition { color: #f3d79a; }
+  .hljs-number, .hljs-symbol, .hljs-bullet { color: #f7b98c; }
+  .hljs-title, .hljs-section, .hljs-name { color: #ffffff; }
+  .hljs-attr, .hljs-attribute, .hljs-variable, .hljs-property, .hljs-params, .hljs-template-variable { color: #cfe9da; }
+  .hljs-type, .hljs-meta, .hljs-selector-class, .hljs-selector-id { color: #bfe2ea; }
+  .hljs-deletion { color: #f4a3a3; }
+  .hljs-emphasis { font-style: italic; }
+  .hljs-strong { font-weight: 500; }
+
+  .body img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+  .body figure { margin-left: 0; margin-right: 0; }
+  .body figure img { width: 100%; }
+  .body figcaption { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--dim); text-align: center; }
+
+  .table-wrap { overflow-x: auto; }
+  .body table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.6; }
+  .body th, .body td { padding: 8px 16px 8px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .body th { color: var(--ink); font-weight: 400; }
+
+  .body .katex { font-size: 1.1em; color: var(--ink); }
+  .body .katex-display { margin: 24px 0 0; padding: 4px 0; overflow-x: auto; overflow-y: hidden; }
+
+  .more-title { font-size: 24px; }
+
+  @media (max-width: 719px) {
+    .body pre { margin-left: 0; margin-right: 0; padding: 16px 20px; border-radius: 8px; }
+  }
+  @media (max-width: 639px) {
+    .post-head h1 { font-size: 36px; }
+    .body h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile header (shown under 960px) -->
+<header class="topbar">
+  <a class="wordmark" href="../">Beomjoon Ko</a>
+  <button class="icon-btn" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18"/></svg>
+  </button>
+</header>
+
+<div class="menu" id="menu">
+  <div class="menu-head">
+    <a class="wordmark" href="../">Beomjoon Ko</a>
+    <button class="icon-btn" id="menu-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="../#about">About</a>
+    <a href="../#writing">Writing</a>
+    <a href="../#experience">Experience</a>
+    <a href="../#bookshelf">Bookshelf</a>
+    <div class="sep"></div>
+    <a class="active" href="./">Writing</a>
+    <a href="../#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <aside class="side">
+    <a class="wordmark" href="../">Beomjoon Ko</a>
+    <nav>
+      <a href="../#about">About</a>
+      <a href="../#writing">Writing</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#bookshelf">Bookshelf</a>
+      <div class="sep"></div>
+      <a class="active" href="./">Writing</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </aside>
+
+  <main>
+    <article id="article" aria-busy="true">
+      <header class="post-head">
+        <div class="post-meta" id="post-meta"></div>
+        <h1 id="post-title"></h1>
+        <p class="lead" id="post-summary" hidden></p>
+        <dl class="byline" id="byline" hidden>
+          <div><dt>Author</dt><dd>Beomjoon Ko</dd></div>
+          <div><dt>Reading time</dt><dd id="post-time"></dd></div>
+        </dl>
+      </header>
+      <div class="body prose" id="post-body"><p class="loading">Loading&hellip;</p></div>
+    </article>
+
+    <section class="block" id="more" hidden>
+      <h2 class="more-title">More writing</h2>
+      <ul class="rows" id="more-list"></ul>
+      <a class="more-link" href="./">All writing
+        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
+      </a>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Beomjoon Ko. All rights reserved.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+<script src="../assets/site.js"></script>
+<script>
+  // Math and code highlighting load only for posts that need them
+  const LIBS = {
+    katexCss: ['https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css', 'sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+'],
+    katex: ['https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js', 'sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg'],
+    hljs: ['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js', 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp'],
+  };
+  const loadScript = ([src, integrity]) => new Promise((resolve, reject) => {
+    const s = Object.assign(document.createElement('script'), { src, integrity, crossOrigin: 'anonymous' });
+    s.onload = resolve;
+    s.onerror = () => reject(new Error(`Failed to load ${src}`));
+    document.head.append(s);
+  });
+  const loadStyle = ([href, integrity]) =>
+    document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href, integrity, crossOrigin: 'anonymous' }));
+
+  const $ = (id) => document.getElementById(id);
+  const esc = site.escapeHtml;
+
+  // Take $...$ and $$...$$ out before Markdown runs, so underscores and backslashes survive.
+  // Code spans and fenced code are left alone; \$ stays a literal dollar sign.
+  const extractMath = (md) => {
+    const math = [];
+    const text = md.replace(
+      /(```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]+`)|\$\$([\s\S]+?)\$\$|\\\$|\$([^\s$](?:[^$\n]*?[^\s$])?)\$/g,
+      (match, code, block, inline) => {
+        if (code || match === '\\$') return match;
+        math.push({ tex: block ?? inline, display: block !== undefined });
+        return `@@MATH${math.length - 1}@@`;
+      });
+    return { text, math };
+  };
+  const renderMath = (html, math) => {
+    const tex = (i, displayMode) => katex.renderToString(math[i].tex.trim(), { displayMode, throwOnError: false });
+    return html
+      .replace(/<p>@@MATH(\d+)@@<\/p>/g, (_, i) => tex(+i, true))
+      .replace(/@@MATH(\d+)@@/g, (_, i) => tex(+i, math[+i].display));
+  };
+
+  // Small touches after Markdown becomes HTML
+  const enhance = (body) => {
+    // Linkable headings
+    const seen = new Map();
+    body.querySelectorAll('h2, h3').forEach((h) => {
+      let id = h.textContent.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '') || 'section';
+      const n = seen.get(id) || 0;
+      seen.set(id, n + 1);
+      h.id = n ? `${id}-${n}` : id;
+    });
+    // Images sit next to the Markdown file; ![alt](file.png "Caption") becomes a captioned figure
+    body.querySelectorAll('img').forEach((img) => {
+      const src = img.getAttribute('src') || '';
+      if (!/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(src)) img.setAttribute('src', `posts/${src}`);
+      img.loading = 'lazy';
+      const p = img.parentElement;
+      if (img.title && p.tagName === 'P' && p.childNodes.length === 1) {
+        const figure = document.createElement('figure');
+        const caption = Object.assign(document.createElement('figcaption'), { textContent: img.title });
+        img.removeAttribute('title');
+        figure.append(img, caption);
+        p.replaceWith(figure);
+      }
+    });
+    // Wide tables scroll instead of overflowing
+    body.querySelectorAll('table').forEach((t) => {
+      const wrap = Object.assign(document.createElement('div'), { className: 'table-wrap' });
+      t.replaceWith(wrap);
+      wrap.append(t);
+    });
+  };
+
+  const showMissing = (message) => {
+    document.title = 'Not found - Beomjoon Ko';
+    $('post-title').textContent = 'Post not found.';
+    $('post-body').innerHTML = `<p>${message} <a href="./">See all writing</a>.</p>`;
+  };
+
+  const render = async () => {
+    const slug = new URLSearchParams(location.search).get('p') || '';
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) return showMissing('This link does not point to a post.');
+
+    let posts, md;
+    try {
+      [posts, md] = await Promise.all([
+        site.loadPosts('posts.json', { drafts: true }),
+        fetch(`posts/${slug}.md`, { cache: 'no-cache' }).then((r) => (r.ok ? r.text() : null)),
+      ]);
+    } catch (err) {
+      if (location.protocol === 'file:') {
+        $('post-body').innerHTML = '<p class="notice">Posts load with <code>fetch</code>, which browsers block on <code>file://</code>. Run <code>python3 -m http.server</code> in the site folder and open <code>http://localhost:8000/writing/</code>.</p>';
+        return;
+      }
+      throw err;
+    }
+    const post = posts.find((p) => p.slug === slug);
+    if (!post || md === null) return showMissing('This post does not exist or has moved.');
+
+    // Header
+    document.title = `${post.title} - Beomjoon Ko`;
+    document.querySelector('meta[name="description"]').content = post.summary || post.title;
+    $('post-meta').innerHTML =
+      (post.tag ? `<span class="tag" data-tag="${esc(post.tag)}">${esc(post.tag)}</span>` : '') +
+      (post.draft ? '<span class="tag" data-tag="Draft">Draft</span>' : '') +
+      `<time datetime="${esc(post.date)}">${site.formatDate(post.date, 'long')}</time>`;
+    $('post-title').textContent = post.title;
+    if (post.summary) {
+      $('post-summary').textContent = post.summary;
+      $('post-summary').hidden = false;
+    }
+
+    // Body
+    const { text, math } = extractMath(md);
+    let html = marked.parse(text, { gfm: true });
+    if (math.length) {
+      loadStyle(LIBS.katexCss);
+      await loadScript(LIBS.katex);
+      html = renderMath(html, math);
+    }
+    const body = $('post-body');
+    body.innerHTML = html;
+    enhance(body);
+    const code = body.querySelectorAll('pre code[class*="language-"]');
+    if (code.length) {
+      await loadScript(LIBS.hljs);
+      code.forEach((el) => hljs.highlightElement(el));
+    }
+
+    const words = body.textContent.trim().split(/\s+/).length;
+    $('post-time').textContent = `${Math.max(1, Math.round(words / 220))} min read`;
+    $('byline').hidden = false;
+
+    // More writing: the newest few other published posts
+    const others = posts.filter((p) => p.slug !== slug && !p.draft).slice(0, 3);
+    if (others.length) {
+      $('more-list').innerHTML = others.map((p) => site.rowHtml(p, `post.html?p=${encodeURIComponent(p.slug)}`)).join('');
+      $('more').hidden = false;
+    }
+
+    // Jump to #heading links once the content exists
+    if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
+  };
+
+  render()
+    .catch((err) => {
+      console.error(err);
+      $('post-body').innerHTML = '<p class="notice">Something went wrong while loading this post. Try reloading the page.</p>';
+    })
+    .finally(() => $('article').removeAttribute('aria-busy'));
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beomjoon Ko</title>
+<meta name="description" content="Beomjoon Ko - notes, projects, and writing.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libertinus+Serif&family=Inter:wght@300;400;500;900&family=Fragment+Mono&display=swap">
+<script>document.documentElement.className = 'js';</script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* Home page only. Shared styles live in assets/site.css. */
+
+  /* ---------- Hero ---------- */
+  .badge {
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    gap: 16px;
+    height: 48px;
+    padding: 4px 4px 4px 12px;
+    border-radius: 40px;
+    background: var(--chip);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .badge:hover { background: #eeeeee; }
+  .badge-label { display: flex; align-items: center; gap: 8px; }
+  .badge-dot { display: grid; place-items: center; width: 16px; height: 16px; }
+  .badge-dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--live); }
+  .badge-pill {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 40px;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 1px rgba(0, 0, 0, .03);
+  }
+  .badge-chev { display: none; margin-right: 12px; color: var(--muted); }
+
+  .hero h1 { margin-top: 32px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .actions .btn { padding: 0 25px; }
+  .btn-soft { min-width: 200px; justify-content: center; background: var(--cream); color: var(--ink); }
+  .btn-soft:hover { background: #eee6d6; }
+
+  /* ---------- ASCII / dither art ---------- */
+  .art {
+    position: relative;
+    margin-top: 40px;
+    aspect-ratio: 32 / 15;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--accent);
+  }
+  .art canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+  .art-label {
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    font: 400 20px/1 var(--serif);
+    letter-spacing: -.01em;
+    color: var(--cream);
+    pointer-events: none;
+  }
+  .viz { display: block; width: 80px; height: 80px; border-radius: 8px; background: var(--cream); }
+  .viz.on-green { background: var(--accent); }
+
+  /* ---------- Statement + focus areas ---------- */
+  .statement {
+    margin-top: 64px;
+    font: 400 32px/1.2 var(--serif);
+    letter-spacing: -.02em;
+    color: var(--ink);
+  }
+  .areas { display: grid; gap: 32px; margin-top: 40px; }
+  .area { display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: start; }
+  .area h3 { font: 400 16px/1 var(--sans); color: var(--ink); margin-bottom: 4px; }
+
+  /* ---------- Sections ---------- */
+  #writing { margin-top: 80px; }
+  .exp li { padding: 8px 0; }
+  .exp .role { color: var(--muted); font-weight: 300; }
+  .books { margin-top: 12px; padding-left: 20px; }
+  .books li { padding-left: 4px; line-height: 1.7; }
+  .books li::marker { color: var(--dim); }
+
+  @media (max-width: 719px) {
+    .art { aspect-ratio: auto; height: 240px; }
+  }
+  @media (max-width: 639px) {
+    .statement { font-size: 28px; }
+    .actions .btn { flex: 1 1 0; min-width: 0; padding: 0 16px; }
+    .badge-pill { display: none; }
+    .badge-chev { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile header (shown under 960px) -->
+<header class="topbar">
+  <a class="wordmark" href="#about">Beomjoon Ko</a>
+  <button class="icon-btn" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18"/></svg>
+  </button>
+</header>
+
+<div class="menu" id="menu">
+  <div class="menu-head">
+    <a class="wordmark" href="#about">Beomjoon Ko</a>
+    <button class="icon-btn" id="menu-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#writing">Writing</a>
+    <a href="#experience">Experience</a>
+    <a href="#bookshelf">Bookshelf</a>
+    <div class="sep"></div>
+    <a href="writing/">Writing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <!-- Desktop sidebar -->
+  <aside class="side">
+    <a class="wordmark" href="#about">Beomjoon Ko</a>
+    <nav>
+      <a class="track" href="#about">About</a>
+      <a class="track" href="#writing">Writing</a>
+      <a class="track" href="#experience">Experience</a>
+      <a class="track" href="#bookshelf">Bookshelf</a>
+      <div class="sep"></div>
+      <a href="writing/">Writing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- ============ About ============ -->
+    <section id="about" class="hero">
+      <!-- Links to the newest post once writing/posts.json loads -->
+      <div data-reveal>
+        <a class="badge" id="latest-badge" href="writing/">
+          <span class="badge-label"><span class="badge-dot"></span>New on the blog</span>
+          <span class="badge-pill">Read the latest post</span>
+          <svg class="badge-chev arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <h1 data-reveal><span id="greeting">Hello.</span><br><span class="soft">Welcome to my&nbsp;website.</span></h1>
+      <script>
+        // Greet by the visitor's local time
+        (() => {
+          const hour = new Date().getHours();
+          document.getElementById('greeting').textContent =
+            hour >= 5 && hour < 12 ? 'Good morning.' : hour >= 12 && hour < 18 ? 'Good afternoon.' : 'Good evening.';
+        })();
+      </script>
+
+      <p class="lead" data-reveal>I'm Beomjoon Ko. I build software, sweat the small details, and write about what I learn along the way.</p>
+
+      <div class="actions" data-reveal>
+        <a class="btn" href="#contact">Get in touch
+          <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
+        </a>
+        <a class="btn btn-soft" href="writing/">Read my writing</a>
+      </div>
+
+      <div class="art" data-reveal aria-hidden="true">
+        <canvas data-art="hero"></canvas>
+        <span class="art-label">Building</span>
+      </div>
+
+      <p class="statement" data-reveal>I like simple tools, honest engineering, and building things that keep getting better after they ship.</p>
+
+      <div class="areas">
+        <div class="area" data-reveal>
+          <canvas class="viz" data-art="orb" aria-hidden="true"></canvas>
+          <div>
+            <h3>Building products.</h3>
+            <p>I take ideas from a rough sketch to something people use every day, and I care about everything in between: the edge cases, the loading states, the last pixel.</p>
+          </div>
+        </div>
+        <div class="area" data-reveal>
+          <canvas class="viz on-green" data-art="rings" aria-hidden="true"></canvas>
+          <div>
+            <h3>Learning continuously.</h3>
+            <p>Every project leaves something behind. I keep notes, revisit old decisions, and fold what I learn back into the next thing I build.</p>
+          </div>
+        </div>
+        <div class="area" data-reveal>
+          <canvas class="viz" data-art="typing" aria-hidden="true"></canvas>
+          <div>
+            <h3>Writing it down.</h3>
+            <p>Writing is how I think. I publish notes on engineering, tools, and the occasional experiment that didn't work out.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Writing ============ -->
+    <!-- Filled from writing/posts.json (the 5 newest posts). Add posts there, not here. -->
+    <section id="writing" class="block">
+      <h2 data-reveal>Writing.</h2>
+      <ul class="rows" id="latest" data-reveal></ul>
+      <a class="more-link" href="writing/" data-reveal>All writing
+        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
+      </a>
+    </section>
+
+    <!-- ============ Experience ============ -->
+    <section id="experience" class="block">
+      <h2 data-reveal>Experience.</h2>
+      <ul class="rows exp">
+        <li data-reveal>
+          <div class="row"><span>Acme Labs <span class="role">- Software Engineer</span></span><span class="meta">2025 - now</span></div>
+          <p>Building the core product end to end, from API design to the small interface details people notice.</p>
+        </li>
+        <li data-reveal>
+          <div class="row"><span>Northwind <span class="role">- Engineering Intern</span></span><span class="meta">2024</span></div>
+          <p>Worked on internal developer tools and made the test suite fast enough that people stopped skipping it.</p>
+        </li>
+        <li data-reveal>
+          <div class="row"><span>Example University <span class="role">- B.S. Computer Science</span></span><span class="meta">2020 - 2024</span></div>
+          <p>Studied systems and architecture. Spent many late nights with assembly and enjoyed most of them.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ Bookshelf (example entries, replace freely) ============ -->
+    <section id="bookshelf" class="block">
+      <h2 data-reveal>Bookshelf.</h2>
+      <p data-reveal>Books I keep coming back to.</p>
+      <ul class="books prose" data-reveal>
+        <li><a href="https://en.wikipedia.org/wiki/The_Pragmatic_Programmer">The Pragmatic Programmer</a> - David Thomas, Andrew Hunt</li>
+        <li><a href="https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs">Structure and Interpretation of Computer Programs</a> - Harold Abelson, Gerald Jay Sussman</li>
+        <li><a href="https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things">The Design of Everyday Things</a> - Don Norman</li>
+        <li><a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach">G&ouml;del, Escher, Bach</a> - Douglas Hofstadter</li>
+      </ul>
+    </section>
+
+    <!-- ============ Contact ============ -->
+    <section id="contact" class="cta" data-reveal>
+      <h2>Let's build something together.</h2>
+      <p class="prose">If you are working on something interesting, or just want to say hi, my inbox is always open. You can also find me on <a href="https://github.com/">GitHub</a> and <a href="https://www.linkedin.com/">LinkedIn</a>.</p>
+      <a class="btn" href="mailto:you@example.com">Say hello
+        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
+      </a>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Beomjoon Ko. All rights reserved.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+  // Latest posts on the home page
+  const latest = document.getElementById('latest');
+  site.loadPosts('writing/posts.json')
+    .then((posts) => {
+      latest.innerHTML = posts.slice(0, 5).map((p) => site.rowHtml(p, `writing/post.html?p=${encodeURIComponent(p.slug)}`)).join('');
+      if (posts[0]) document.getElementById('latest-badge').href = `writing/post.html?p=${encodeURIComponent(posts[0].slug)}`;
+    })
+    .catch(() => { latest.hidden = true; });
+
+  // ---------- ASCII / dither art ----------
+  // Every <canvas data-art="name"> is drawn by the function of that name below.
+  (() => {
+    const GREEN = '#0e5a3a';
+    const CREAM = '#f6f1e6';
+    const RAMP = ' .:-=+*#%@';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
+    const bayer = (i, j) => BAYER[(j & 3) * 4 + (i & 3)];
+    // Icon pixel grid that stays crisp: 2px cells on retina, 3px cells on 1x screens
+    const cell = () => (devicePixelRatio >= 2 ? [2, 1.5] : [3, 2]);
+
+    // Smooth 3D value noise
+    const hash = (x, y, z) => { const h = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453; return h - Math.floor(h); };
+    const ease = (t) => t * t * (3 - 2 * t);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const noise = (x, y, z) => {
+      const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+      const u = ease(x - xi), v = ease(y - yi), w = ease(z - zi);
+      return lerp(
+        lerp(lerp(hash(xi, yi, zi), hash(xi + 1, yi, zi), u), lerp(hash(xi, yi + 1, zi), hash(xi + 1, yi + 1, zi), u), v),
+        lerp(lerp(hash(xi, yi, zi + 1), hash(xi + 1, yi, zi + 1), u), lerp(hash(xi, yi + 1, zi + 1), hash(xi + 1, yi + 1, zi + 1), u), v),
+        w);
+    };
+    const fbm = (x, y, z) => (noise(x, y, z) * 4 + noise(x * 2, y * 2, z * 2) * 2 + noise(x * 4, y * 4, z * 4)) / 7;
+    const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+    const band = (a, b, v) => ease(clamp((v - a) / (b - a)));
+
+    // Brightness (0-1) of a slowly turning planet at view-space normal (nx, ny, nz)
+    const L = [-0.8, -0.35, 0.5].map((c, _, l) => c / Math.hypot(...l));
+    const planet = (nx, ny, nz, a, scale = 3.2) => {
+      const c = Math.cos(a), s = Math.sin(a);
+      const x = nx * c + nz * s, z = nz * c - nx * s;
+      const grain = 0.7 + 0.6 * noise(x * scale * 4, ny * scale * 4, z * scale * 4);
+      const land = band(0.51, 0.56, fbm(x * scale + 7.3, ny * scale + 2.1, z * scale + 4.9)) * grain;
+      const c2 = Math.cos(a * 1.4 + 1), s2 = Math.sin(a * 1.4 + 1);
+      const cloud = band(0.55, 0.68, fbm((nx * c2 + nz * s2) * scale * 1.4, ny * scale * 3 + 9.1, (nz * c2 - nx * s2) * scale * 1.4));
+      const lit = Math.max(0, nx * L[0] + ny * L[1] + nz * L[2]);
+      const rim = Math.pow(1 - nz, 6) * 0.9;
+      return { land, cloud, lit, rim };
+    };
+
+    // Hero: big pixels on top, finer dither below, ASCII planet rising from the bottom
+    const hero = (ctx, w, h, t) => {
+      ctx.fillStyle = GREEN;
+      ctx.fillRect(0, 0, w, h);
+      const R = Math.max(w * 0.75, h * 1.5), cx = w / 2, cy = h * 0.55 + R;
+      const inPlanet = (x, y, m) => (x - cx) ** 2 + (y - cy) ** 2 < (R + m) ** 2;
+      const top = Math.round(h * 0.3), mid = Math.round(h * 0.47);
+
+      ctx.fillStyle = CREAM;
+      ctx.beginPath();
+      for (let y = 14, j = 0; y + 12 < top; y += 22, j++) {
+        for (let x = 14, i = 0; x + 12 < w - 8; x += 22, i++) {
+          if (x < 132 && y < 52) continue; // keep the label clear
+          if (noise(i * 0.55, j * 0.9, t * 0.15) > 0.6 - j * 0.04) ctx.rect(x, y, 12, 12);
+        }
+      }
+      for (const [y0, y1, g, sq] of [[top, mid, 8, 5], [mid, h, 5, 3]]) {
+        for (let y = y0, j = 0; y < y1; y += g, j++) {
+          for (let x = 4, i = 0; x < w - 2; x += g, i++) {
+            if (inPlanet(x, y, 12)) continue;
+            const depth = (y - top) / (h - top);
+            const b = 0.18 + depth * 0.35 + (noise(x * 0.03 + t * 0.25, y * 0.06, t * 0.1) - 0.5) * 0.9;
+            if (b > bayer(i, j)) ctx.rect(x, y, sq, sq);
+          }
+        }
+      }
+      ctx.fill();
+
+      ctx.font = '10px "Fragment Mono", ui-monospace, monospace';
+      ctx.textBaseline = 'top';
+      const cw = 6, ch = 9, a = t * 0.08 + 2;
+      for (let y = Math.max(0, cy - R); y < h; y += ch) {
+        for (let x = 0; x < w; x += cw) {
+          const dx = (x + cw / 2 - cx) / R, dy = (y + ch / 2 - cy) / R, d = dx * dx + dy * dy;
+          if (d >= 1) continue;
+          const p = planet(dx, dy, Math.sqrt(1 - d), a);
+          const b = clamp(0.03 + p.lit * (0.07 + 0.36 * p.land) + p.cloud * 0.38 * p.lit + p.rim * 0.8);
+          const k = Math.min(RAMP.length - 1, Math.floor(b * RAMP.length));
+          if (k > 0) ctx.fillText(RAMP[k], x, y);
+        }
+      }
+    };
+
+    // Icon 1: a dithered planet
+    const orb = (ctx, w, h, t) => {
+      ctx.fillStyle = CREAM;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = GREEN;
+      ctx.beginPath();
+      const r = w * 0.38, c = w / 2, a = t * 0.35, [g, sq] = cell();
+      for (let y = 0, j = 0; y < h; y += g, j++) {
+        for (let x = 0, i = 0; x < w; x += g, i++) {
+          const dx = (x + g / 2 - c) / r, dy = (y + g / 2 - c) / r, d = dx * dx + dy * dy;
+          if (d >= 1) continue;
+          const p = planet(dx, dy, Math.sqrt(1 - d), a, 1.8);
+          if (clamp(0.12 + 0.62 * p.lit + 0.3 * p.land) > bayer(i, j)) ctx.rect(x, y, sq, sq);
+        }
+      }
+      ctx.fill();
+    };
+
+    // Icon 2: rings rippling outward
+    const rings = (ctx, w, h, t) => {
+      ctx.fillStyle = GREEN;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = CREAM;
+      ctx.beginPath();
+      const c = w / 2, [g, sq] = cell();
+      for (let y = 0, j = 0; y < h; y += g, j++) {
+        for (let x = 0, i = 0; x < w; x += g, i++) {
+          const d = Math.hypot(x + g / 2 - c, y + g / 2 - c);
+          const wave = (0.5 + 0.5 * Math.cos(d * 0.62 - t * 2.4)) * (1 - d / 44) * 0.9;
+          const b = Math.abs(d - 9.5) < g * 0.65 ? 1 : d < 8 ? 0 : wave;
+          if (b > bayer(i, j)) ctx.rect(x, y, sq, sq);
+        }
+      }
+      ctx.fill();
+    };
+
+    // Icon 3: a note typing itself out
+    const NOTE = ['# notes', '- read', '- build', '- write', '- repeat'];
+    const TOTAL = NOTE.join('').length;
+    const typing = (ctx, w, h, t) => {
+      ctx.fillStyle = CREAM;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = GREEN;
+      ctx.font = '9px "Fragment Mono", ui-monospace, monospace';
+      ctx.textBaseline = 'top';
+      const cycle = TOTAL / 9 + 2.5;
+      let n = reduce ? TOTAL : Math.floor((t % cycle) * 9);
+      let y = 9, caretX = 9, caretY = 9;
+      for (const line of NOTE) {
+        if (n <= 0) break;
+        const shown = line.slice(0, n);
+        ctx.fillText(shown, 9, y);
+        caretX = 9 + ctx.measureText(shown).width;
+        caretY = y;
+        n -= line.length;
+        y += 13;
+      }
+      if (reduce || Math.floor(t * 2.5) % 2 === 0) ctx.fillRect(caretX + 1, caretY, 5, 10);
+    };
+
+    // Rendering loop: ~20fps, only while a canvas is on screen
+    const draws = { hero, orb, rings, typing };
+    const arts = [];
+    const start = performance.now();
+    const clock = () => (reduce ? 12 : (performance.now() - start) / 1000);
+    const fit = (a) => {
+      const r = a.el.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      a.w = r.width;
+      a.h = r.height;
+      a.el.width = Math.round(r.width * dpr);
+      a.el.height = Math.round(r.height * dpr);
+      a.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const paint = (a, t) => { if (a.w && a.h) a.draw(a.ctx, a.w, a.h, t); };
+    let raf = 0, last = 0;
+    const tick = (ts) => {
+      raf = 0;
+      if (ts - last >= 48) {
+        last = ts;
+        const t = clock();
+        arts.forEach((a) => { if (a.visible) paint(a, t); });
+      }
+      if (arts.some((a) => a.visible)) raf = requestAnimationFrame(tick);
+    };
+    const kick = () => { if (!reduce && !raf) raf = requestAnimationFrame(tick); };
+    const find = (el) => arts.find((a) => a.el === el);
+    const sizes = new ResizeObserver((entries) => entries.forEach((e) => { const a = find(e.target); fit(a); paint(a, clock()); }));
+    const views = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { find(e.target).visible = e.isIntersecting; });
+      kick();
+    });
+    const init = () => document.querySelectorAll('canvas[data-art]').forEach((el) => {
+      const a = { el, ctx: el.getContext('2d'), draw: draws[el.dataset.art], w: 0, h: 0, visible: false };
+      arts.push(a);
+      fit(a);
+      paint(a, clock());
+      sizes.observe(el);
+      views.observe(el);
+    });
+    Promise.race([document.fonts.load('10px "Fragment Mono"'), new Promise((r) => setTimeout(r, 1500))])
+      .catch(() => {})
+      .then(init);
+  })();
+</script>
+</body>
+</html>

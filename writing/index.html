@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing - Beomjoon Ko</title>
+<meta name="description" content="Essays, project write-ups, and notes by Beomjoon Ko.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libertinus+Serif&family=Inter:wght@300;400;500;900&family=Fragment+Mono&display=swap">
+<script>document.documentElement.className = 'js';</script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  /* Writing index only. Posts come from posts.json. */
+  .intro h1 { font-size: 44px; line-height: 1; }
+
+  .list-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-top: 40px;
+  }
+  .list-head h2 { font-size: 24px; line-height: 1.2; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips[hidden] { display: none; }
+  .chip {
+    height: 32px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--text);
+    font: 400 14px/1 var(--sans);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .chip:hover { background: #ececec; color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+  .posts { display: grid; gap: 32px; margin-top: 40px; padding: 0; list-style: none; }
+  .post { display: block; text-decoration: none; }
+  .post-title {
+    display: block;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.7;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: transparent;
+    transition: color .2s, text-decoration-color .2s;
+  }
+  @media (hover: hover) {
+    .post:hover .post-title { color: var(--accent); text-decoration-color: currentColor; }
+  }
+  .post-summary { display: block; }
+  .post .post-meta { margin-top: 8px; }
+
+  @media (max-width: 639px) {
+    .intro h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile header (shown under 960px) -->
+<header class="topbar">
+  <a class="wordmark" href="../">Beomjoon Ko</a>
+  <button class="icon-btn" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18"/></svg>
+  </button>
+</header>
+
+<div class="menu" id="menu">
+  <div class="menu-head">
+    <a class="wordmark" href="../">Beomjoon Ko</a>
+    <button class="icon-btn" id="menu-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="../#about">About</a>
+    <a href="../#writing">Writing</a>
+    <a href="../#experience">Experience</a>
+    <a href="../#bookshelf">Bookshelf</a>
+    <div class="sep"></div>
+    <a class="active" href="./" aria-current="page">Writing</a>
+    <a href="../#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+  <aside class="side">
+    <a class="wordmark" href="../">Beomjoon Ko</a>
+    <nav>
+      <a href="../#about">About</a>
+      <a href="../#writing">Writing</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#bookshelf">Bookshelf</a>
+      <div class="sep"></div>
+      <a class="active" href="./" aria-current="page">Writing</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="intro">
+      <h1 data-reveal>Writing. <span class="soft">Notes from building, reading, and learning.</span></h1>
+      <p class="lead" data-reveal>Essays, project write-ups, and short notes. Some are polished, most are me thinking out loud.</p>
+    </section>
+
+    <section>
+      <div class="list-head" data-reveal>
+        <h2>All posts</h2>
+        <div class="chips" id="chips" role="group" aria-label="Filter by tag" hidden></div>
+      </div>
+      <ul class="posts" id="posts"></ul>
+      <p class="notice" id="notice" hidden></p>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Beomjoon Ko. All rights reserved.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="../assets/site.js"></script>
+<script>
+  const esc = site.escapeHtml;
+  const list = document.getElementById('posts');
+  const chips = document.getElementById('chips');
+  const notice = document.getElementById('notice');
+
+  const itemHtml = (p) =>
+    `<li data-reveal><a class="post" href="post.html?p=${encodeURIComponent(p.slug)}">` +
+    `<span class="post-title">${esc(p.title)}</span>` +
+    (p.summary ? `<span class="post-summary">${esc(p.summary)}</span>` : '') +
+    `<span class="post-meta">` +
+    (p.tag ? `<span class="tag" data-tag="${esc(p.tag)}">${esc(p.tag)}</span>` : '') +
+    `<time datetime="${esc(p.date)}">${site.formatDate(p.date)}</time></span></a></li>`;
+
+  site.loadPosts('posts.json')
+    .then((posts) => {
+      const tags = ['All', ...new Set(posts.map((p) => p.tag).filter(Boolean))];
+      let active = new URLSearchParams(location.search).get('tag');
+      if (!tags.includes(active)) active = 'All';
+
+      const render = () => {
+        const shown = posts.filter((p) => active === 'All' || p.tag === active);
+        list.innerHTML = shown.map(itemHtml).join('');
+        chips.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', c.dataset.tag === active));
+        notice.hidden = shown.length > 0;
+        notice.textContent = 'No posts yet.';
+        site.reveal(list);
+      };
+
+      // Tag filter, only worth showing when there is more than one tag
+      chips.innerHTML = tags.map((t) => `<button class="chip" type="button" data-tag="${esc(t)}">${esc(t)}</button>`).join('');
+      chips.hidden = tags.length < 3;
+      chips.addEventListener('click', (e) => {
+        const chip = e.target.closest('.chip');
+        if (!chip) return;
+        active = chip.dataset.tag;
+        const url = new URL(location.href);
+        if (active === 'All') url.searchParams.delete('tag');
+        else url.searchParams.set('tag', active);
+        history.replaceState(null, '', url);
+        render();
+      });
+      render();
+    })
+    .catch(() => {
+      notice.hidden = false;
+      notice.innerHTML = location.protocol === 'file:'
+        ? 'Posts load from <code>posts.json</code>, which browsers block on <code>file://</code>. Run <code>python3 -m http.server</code> in the site folder and open <code>http://localhost:8000/writing/</code>.'
+        : 'Could not load posts. Check that <code>writing/posts.json</code> is valid JSON.';
+    });
+</script>
+</body>
+</html>
