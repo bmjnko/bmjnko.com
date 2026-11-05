@@ -1,4 +1,4 @@
-# bmjnko.github.io
+# bmjnko.com
 
 Beomjoon Ko의 개인 웹사이트.
 프레임워크나 빌드 단계 없이 HTML, CSS, Markdown 파일만으로 동작한다.
@@ -33,5 +33,26 @@ python3 -m http.server
 
 ## 배포
 
-`main` 브랜치에 push하면 GitHub Pages가 1~2분 안에 `https://bmjnko.github.io`에 반영한다.
-`.nojekyll`은 GitHub가 파일을 가공하지 않고 그대로 올리게 하는 빈 파일이므로 지우지 않는다.
+`main` 브랜치에 push하면 GitHub Pages가 1~2분 안에 `https://bmjnko.com`에 반영한다.
+`https://bmjnko.github.io`로 들어오면 `bmjnko.com`으로 자동으로 넘어간다.
+
+아래 두 파일은 지우지 않는다.
+
+- `.nojekyll`: GitHub가 파일을 가공하지 않고 그대로 올리게 하는 빈 파일.
+- `CNAME`: 사용자 지정 도메인(`bmjnko.com`) 설정. GitHub Pages 설정 화면에서 도메인을 바꾸면 GitHub가 이 파일을 직접 커밋하므로, 그 뒤에는 `git pull`로 받아온다.
+
+## 도메인 (Squarespace DNS)
+
+도메인은 Squarespace에서 관리한다.
+DNS에는 Squarespace 기본 기록(Squarespace Defaults) 대신 아래 기록만 둔다.
+
+| Host | Type | Data |
+| --- | --- | --- |
+| `@` | A | `185.199.108.153` |
+| `@` | A | `185.199.109.153` |
+| `@` | A | `185.199.110.153` |
+| `@` | A | `185.199.111.153` |
+| `www` | CNAME | `bmjnko.github.io` |
+
+Squarespace의 Website 화면에 뜨는 "Update DNS records" 버튼은 누르지 않는다.
+누르면 Squarespace 기본 기록이 다시 들어가서 사이트가 Squarespace 체험판 화면으로 돌아간다.
