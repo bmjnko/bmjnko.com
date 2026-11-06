@@ -105,7 +105,7 @@ section { scroll-margin-top: 48px; }
 .side nav a:hover { color: var(--ink); }
 .side nav a.active { color: var(--ink); font-weight: 400; }
 .side nav a.active::before { transform: scaleY(1); }
-.sep { height: 1px; background: var(--line); margin: 12px 32px 12px 16px; }
+.sep { height: 1px; background: var(--line); margin: 12px 16px; }
 
 /* ---------- Type ---------- */
 h1 {

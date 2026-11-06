@@ -88,7 +88,7 @@
   .area h3 { font: 400 16px/1 var(--sans); color: var(--ink); margin-bottom: 4px; }
 
   /* ---------- Sections ---------- */
-  #writing { margin-top: 80px; }
+  .hero + .block { margin-top: 80px; }
   .exp li { padding: 8px 0; }
   .exp .role { color: var(--muted); font-weight: 300; }
   .books { margin-top: 12px; padding-left: 20px; }
@@ -125,11 +125,11 @@
   </div>
   <nav>
     <a href="#about">About</a>
-    <a href="#writing">Writing</a>
     <a href="#experience">Experience</a>
-    <a href="#bookshelf">Bookshelf</a>
+    <a href="#thoughts">Thoughts</a>
+    <a href="#recommendations">Recommendations</a>
     <div class="sep"></div>
-    <a href="writing/">Writing</a>
+    <a href="writing/">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
 </div>
@@ -141,11 +141,11 @@
     <a class="wordmark" href="#about">Beomjoon Ko</a>
     <nav>
       <a class="track" href="#about">About</a>
-      <a class="track" href="#writing">Writing</a>
       <a class="track" href="#experience">Experience</a>
-      <a class="track" href="#bookshelf">Bookshelf</a>
+      <a class="track" href="#thoughts">Thoughts</a>
+      <a class="track" href="#recommendations">Recommendations</a>
       <div class="sep"></div>
-      <a href="writing/">Writing</a>
+      <a href="writing/">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
   </aside>
@@ -214,16 +214,6 @@
       </div>
     </section>
 
-    <!-- ============ Writing ============ -->
-    <!-- Filled from writing/posts.json (the 5 newest posts). Add posts there, not here. -->
-    <section id="writing" class="block">
-      <h2 data-reveal>Writing.</h2>
-      <ul class="rows" id="latest" data-reveal></ul>
-      <a class="more-link" href="writing/" data-reveal>All writing
-        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
-      </a>
-    </section>
-
     <!-- ============ Experience ============ -->
     <section id="experience" class="block">
       <h2 data-reveal>Experience.</h2>
@@ -243,9 +233,19 @@
       </ul>
     </section>
 
-    <!-- ============ Bookshelf (example entries, replace freely) ============ -->
-    <section id="bookshelf" class="block">
-      <h2 data-reveal>Bookshelf.</h2>
+    <!-- ============ Thoughts ============ -->
+    <!-- Filled from writing/posts.json (the 5 newest posts). Add posts there, not here. -->
+    <section id="thoughts" class="block">
+      <h2 data-reveal>Thoughts.</h2>
+      <ul class="rows" id="latest" data-reveal></ul>
+      <a class="more-link" href="writing/" data-reveal>All writing
+        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="shaft" d="M1 6h8"/><path class="head" d="M4 2l4 4-4 4"/></svg>
+      </a>
+    </section>
+
+    <!-- ============ Recommendations (example entries, replace freely) ============ -->
+    <section id="recommendations" class="block">
+      <h2 data-reveal>Recommendations.</h2>
       <p data-reveal>Books I keep coming back to.</p>
       <ul class="books prose" data-reveal>
         <li><a href="https://en.wikipedia.org/wiki/The_Pragmatic_Programmer">The Pragmatic Programmer</a> - David Thomas, Andrew Hunt</li>

@@ -7,7 +7,7 @@ Beomjoon Ko의 개인 웹사이트.
 
 | 경로 | 내용 |
 | --- | --- |
-| `index.html` | 홈 (인사말, 소개, 그림, Experience, Bookshelf, Contact) |
+| `index.html` | 홈 (인사말, 소개, 그림, Experience, Thoughts, Recommendations, Contact) |
 | `assets/site.css` | 모든 페이지가 함께 쓰는 색, 폰트, 레이아웃 |
 | `assets/site.js` | 모바일 메뉴, 사이드바 강조, 스크롤 등장 효과, 글 목록 불러오기 |
 | `writing/index.html` | 블로그 목록 |
